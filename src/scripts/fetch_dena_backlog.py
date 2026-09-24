@@ -1,8 +1,8 @@
 """
-Azure DevOps DenA Backlog Fetcher
+Azure DevOps DenA (Data & Analytics) Backlog Fetcher
 
 This script connects to Azure DevOps REST API to fetch all work items from the
-DevOps DenA project and saves them to a JSON file for further analysis.
+DevOps DenA (Data & Analytics) project and saves them to a JSON file for further analysis.
 
 Features:
 - Authenticates using Personal Access Token (PAT) from environment variables

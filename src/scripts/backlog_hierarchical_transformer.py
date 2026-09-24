@@ -12,7 +12,7 @@ Features:
 - Outputs simplified, human-readable JSON with timestamp
 
 Requirements:
-- Input files from fetch_data_science_pool_backlog.py
+- Input files from fetch_dena_backlog.py
 - Standard library only (json, pathlib, datetime)
 
 Output: backlog_simplified_YYYYMMDD_HHMMSS.json in azure_devops_data/
@@ -31,7 +31,7 @@ def load_latest_backlog_file():
     data_dir = Path(__file__).parent.parent.parent / 'azure_devops_data'
     
     # Find the most recent file
-    json_files = list(data_dir.glob('data_science_pool_*.json'))
+    json_files = list(data_dir.glob('dena_*.json'))
     if not json_files:
         print("✗ No backlog data files found")
         return None
@@ -71,6 +71,9 @@ def extract_key_fields(work_item):
         'closed_date': fields.get('Microsoft.VSTS.Common.ClosedDate', ''),
         'priority': fields.get('Microsoft.VSTS.Common.Priority'),
         'value_area': fields.get('Microsoft.VSTS.Common.ValueArea'),
+        'moeite_int': fields.get('Custom.MoeiteInt'),
+        'area_path': fields.get('System.AreaPath'),
+        'business_value': fields.get('Microsoft.VSTS.Common.BusinessValue'),
     }
     
     # Add optional fields if they exist
