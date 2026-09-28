@@ -1,20 +1,18 @@
 # D&A Feature Process KPI Dashboard
 
-This repository supports the Data & Analytics (D&A) team in analysing the Feature process in Azure DevOps. It collects Azure DevOps work item data, transforms the backlog into an analysis-friendly structure, and provides a Jupyter notebook for exploring Feature KPIs.
+This repository supports the Data & Analytics (D&A) team in analysing the Feature process in Azure DevOps. It collects Azure DevOps work item data, transforms the backlog into an analysis-friendly structure, and provides a Jupyter notebook for wrangling the data into one big table to be exported to Power BI for KPI dashboarding.
 
-The first use case is the retrospective with the domain teams on 5 October. The analysis covers the period from 20 February 2025, the date of the previous retrospective, through the current date.
+The first use case is the retrospective with the domain teams on 5 October 2026. The analysis covers the period from 20 February 2025, the date of the previous retrospective, through the current date.
 
-> **Status:** Initial setup based on the former Data Science Pool repository. The KPI analysis and D&A project configuration are still being developed.
+## Output
 
-## Planned Insights
+The output of the notebook is a single table of all Features with at least the following columns:
 
-The initial analysis focuses on Features and aims to provide:
-
-- Total number of completed Features.
-- Number of completed Features per domain.
-- Average effort (`Moeite Int`) per month for completed Features.
+- Name and ID
+- Epic
+- Domain (area).
+- Effort per feature (`Moeite Int`)
 - Lead time based on state changes:
-  - **Effort determination time:** from `Ingediend` until `Moeite Int` is filled in.
   - **Waiting time:** from `Geprioriteerd` to `In progress`.
   - **Work in progress:** from `In progress` to `Done`.
 - Work-in-progress duration analysed:
@@ -26,11 +24,12 @@ Some metrics depend on a reliable Azure DevOps history of state and field change
 
 ## How It Works
 
-1. **Fetch:** `src/scripts/fetch_data_science_pool_backlog.py` authenticates with an Azure DevOps Personal Access Token and downloads work items through the Azure DevOps REST API.
-2. **Transform:** `src/scripts/backlog_hierarchical_transformer.py` converts the raw export into an Epic -> Feature -> User Story -> Task hierarchy and adds summary statistics.
-3. **Analyse:** `notebooks/features_analysis.ipynb` loads the transformed data into pandas for filtering and Feature analysis.
+Run the feature_analysis notebook. 
+Within the notebook, the following steps are performed:
 
-The fetch and transform scripts are currently inherited from the DSP repository. Before production use, the Azure DevOps project and output naming in the fetch script must be aligned with the D&A project.
+1. **Fetch 1:** `src/scripts/fetch_data_science_pool_backlog.py` authenticates with an Azure DevOps Personal Access Token and downloads work items through the Azure DevOps REST API.
+2. **Transform:** `src/scripts/backlog_hierarchical_transformer.py` converts the raw export into an Epic -> Feature -> User Story -> Task hierarchy and adds summary statistics.
+3. **Fetch 2:** `src/scripts/fetch_work_items.py` gets work item history and field changes for the Features in the backlog. This is necessary to determine when the effort was entered and to calculate lead times.
 
 ## Project Structure
 
@@ -60,15 +59,7 @@ src/
    ```
    AZURE_API=your_personal_access_token
    ```
-4. Fetch the latest Azure DevOps backlog:
-   ```
-   python src/scripts/fetch_data_science_pool_backlog.py
-   ```
-5. Transform the latest export:
-   ```
-   python src/scripts/backlog_hierarchical_transformer.py
-   ```
-6. Open the notebook and run its cells to analyse the data:
+4. Open the notebook and run its cells to analyse the data:
    ```
    jupyter notebook notebooks/features_analysis.ipynb
    ```
