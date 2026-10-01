@@ -66,7 +66,7 @@ src/
 
 ## GitHub Pages
 
-A public landing page lives in [`docs/`](docs/index.html) and is served via GitHub Pages. Visuals built from the analysis will be added there in a follow-up step.
+A public retrospective dashboard lives in [`docs/`](docs/index.html) and is served via GitHub Pages. Run `notebooks/pages_visuals.ipynb` after refreshing the analysis export to update its aggregated completion, waiting-time, and work-in-progress charts. The public page contains no raw work-item details.
 
 To enable it (one-time, repo admin): **Settings &rarr; Pages &rarr; Source: Deploy from a branch &rarr; Branch: `main`, folder: `/docs`**. The site is public by design, so only aggregated/non-sensitive outputs should be placed in `docs/` — never raw `azure_devops_data/` exports.
 
