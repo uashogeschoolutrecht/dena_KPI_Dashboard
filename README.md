@@ -64,6 +64,12 @@ src/
    jupyter notebook notebooks/features_analysis.ipynb
    ```
 
+## GitHub Pages
+
+A public landing page lives in [`docs/`](docs/index.html) and is served via GitHub Pages. Visuals built from the analysis will be added there in a follow-up step.
+
+To enable it (one-time, repo admin): **Settings &rarr; Pages &rarr; Source: Deploy from a branch &rarr; Branch: `main`, folder: `/docs`**. The site is public by design, so only aggregated/non-sensitive outputs should be placed in `docs/` — never raw `azure_devops_data/` exports.
+
 ## Data and Security
 
 - Raw exports are written to `azure_devops_data/` and should remain uncommitted.
