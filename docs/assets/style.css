@@ -132,11 +132,17 @@ main {
 .note { color: #58677a; font-size: 0.92rem; }
 
 iframe {
-  height: 600px;
+  display: block;
+  height: 560px;
   margin-top: 0.5rem;
 }
 
-#afgerond iframe { height: 660px; }
+/* Chart height (set in notebook) + ~20px body margin */
+iframe[src*="features_completed"] { height: 550px; }
+iframe[src*="closed_effort_per_month"] { height: 505px; }
+iframe[src*="closed_effort_by_area"] { height: 465px; }
+iframe[src*="waiting_time_by_area"] { height: 470px; }
+iframe[src*="wip_duration_by_area"] { height: 555px; }
 
 footer {
   padding: 1.5rem 1rem 2rem;
@@ -149,5 +155,4 @@ footer a:hover { color: #1746a2; }
   .hero { padding: 3rem 1.25rem; }
   main { width: min(100% - 1rem, 1000px); margin-top: 1rem; }
   .card { border-radius: 12px; }
-  iframe, #afgerond iframe { height: 620px; }
 }
